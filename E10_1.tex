@@ -1,0 +1,161 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+ % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[english]{babel}
+\usepackage{natbib} 
+\usepackage{amsfonts}
+\usepackage{hyphenat}
+\usepackage{booktabs} % for much better looking tables
+\usepackage{enumerate}
+\usepackage{kbordermatrix} % for matrices with indexes and brackets instead of parentheses;
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage[group-separator={,}]{siunitx}
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+\usepackage{caption}
+\usepackage{sidecap}
+\usepackage{setspace}
+\sidecaptionvpos{figure}{c}
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+%\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+\captionsetup[figure]{labelfont={bf,it},textfont={it}}
+\setlength{\parindent}{0cm}
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{Probability with martingales - exercises}
+\author{}
+\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+{\bf \maketitle \par}
+
+
+\section*{E10.1}
+
+\textbf{First part}
+
+$\mathcal{F}_{n}:=\sigma\left(B_{1},B_{2},...,B_{n}\right)$
+
+$M_{n}$ is $\mathcal{F}_{n}$-measurable since $M_{n}$ is a one-to-one function of $B_{n}$ and $\sigma\left(B_{n}\right)\subseteq \mathcal{F}_{n}$.
+
+$\mathrm{E}\left(|M_{n}|\right)<\infty$ for all $n$, since  $0 \leq M_{n} \leq 1$ .
+
+\vspace{\baselineskip}
+\begin{equation*}
+\begin{array}{lll}
+\mathrm{E}\left(M_{n}|\mathcal{F}_{n-1}\right)&=&\mathrm{E}\left[M_{n}|\sigma\left(\sigma\left(B_{n-1}\right),\mathcal{F}_{n-2}\right)\right]\\
+&=&\mathrm{E}\left[M_{n}|\sigma\left(B_{n-1}\right)\right]\\
+&=&\left(\frac{B_{n-1}+1}{n+2}\right)\left(\frac{n-B_{n-1}}{n+1}\right)+\left(\frac{B_{n-1}+2}{n+2}\right)\left(\frac{B_{n-1}+1}{n+1}\right)\\
+&=&\left(\frac{B_{n-1}+1}{n+1}\right)\\
+&=&M_{n-1} \quad.
+\end{array}
+\end{equation*}
+
+\textbf{Second part}
+
+Let $\mathbf{P}$ be the one-step transition matrix from time $n$ to time $n+1$ for the martingale $M$. Then,
+
+\begin{equation*}
+\renewcommand{\arraystretch}{1.5}
+\mathbf{P}=\kbordermatrix{~&\left(\frac{1}{n+3}\right)&\left(\frac{2}{n+3}\right)&\left(\frac{3}{n+3}\right)&\hdots&\left(\frac{n+2}{n+3}\right)\\
+				(\frac{1}{n+2})&\frac{n+1}{n+2}&\frac{1}{n+2}&0&\hdots&0\\
+				(\frac{2}{n+2})&0&\frac{n}{n+2}&\frac{2}{n+2}&\hdots&0\\
+			    \vdots &\vdots&\vdots&\ddots&\ddots&\vdots\\
+			    (\frac{n+1}{n+2})&0&0&0&\frac{1}{n+2}&\frac{n+1}{n+2}}.
+\end{equation*}
+
+If $\boldsymbol{\mu^{(n)}}=\left[\frac{1}{n+1} \quad
+\frac{1}{n+1} \quad \hdots \quad \frac{1}{n+1}\right]$, then
+\begin{equation*}
+\begin{array}{lll}
+ \boldsymbol{\mu^{(n)}}\mathbf{P}&=&\left[\frac{1}{n+2} \quad \frac{1+n}{(n+1)(n+2)}\quad \frac{2+n-1}{(n+1) (n+2)} \quad \hdots\quad\right]\\
+ &=& \left[\frac{1}{n+2} \quad \frac{1}{n+2} \quad \hdots \quad \right]\\
+&=&\boldsymbol{\mu^{(n+1)}} \quad .
+\end{array}
+\end{equation*}
+
+In addition, $\boldsymbol{\mu^{(0)}}:=\left[\quad 1 \quad \right]$, so it must be that $\boldsymbol{\mu^{(n)}}=\left[\frac{1}{n+1} \quad
+\frac{1}{n+1} \quad \hdots \quad \frac{1}{n+1}\right]$. 
+
+And $\mu^{(n)}_{k}=\mathrm{P}\left(B_{n}=k\right)$.
+\vspace{\baselineskip}
+
+
+$\mathrm{P} \left(M_{n} \leq m\right)= \mathrm{P} \left(\frac{B_{n}+1}{n+2} \leq m \right)=\mathrm{P}\left[ B_{n} \leq m(n+2)-1\right]=\frac{m(n+2)-1}{n+1} \to m$, as $n \to \infty$.
+
+So $M_{n}$ converges in distribution to $\Theta \sim$ U$(0,1)$.  
+\vspace{\baselineskip}
+
+\textbf{Third part}
+\begin{equation*}
+{\setstretch{1.75}
+\begin{array}{lll}
+\mathrm{E}\left[N^{\theta}_{n}|\sigma \left(N^{\theta}_{n-1},N^{\theta}_{n-2}, ...\right)\right]&=&\mathrm{E}\left[N^{\theta}_{n}|\sigma \left(N^{\theta}_{n-1}\right)\right]\\
+&=&\mathrm{E}\left[N^{\theta}_{n}|\sigma \left(B_{n-1}\right)\right]\\
+&=&\frac{\left(n+1\right)!}{B_{n-1}!\left(n-B_{n-1}\right)!}\theta^{B_{n-1}}\left(1-\theta\right)^{n-B_{n-1}}\left(\frac{n-B_{n-1}}{n+1}\right)\\
+&+&\frac{\left(n+1\right)!}{\left(B_{n-1}+1\right)!\left(n-B_{n-1}-1\right)!}\theta^{B_{n-1}+1}\left(1-\theta\right)^{n-B_{n-1}-1}\left(\frac{B_{n-1}+1}{n+1}\right)\\
+&=&...\\
+&=&\frac{n!}{B_{n-1}!\left(n-1-B_{n-1}\right)!}\left[\theta^{B_{n-1}}\left(1-\theta\right)^{B_{n-1}}+\theta^{B_{n-1}+1}\left(1-\theta\right)^{n-1-B_{n-1}}\right]\\
+&=&\frac{n!}{B_{n-1}!\left(n-1-B_{n-1}\right)!}\theta^{B_{n-1}}\left(1-\theta\right)^{n-1-B_{n-1}}\left[\left(1-\theta\right)+\theta\right]\\
+&=&N^{\theta}_{n-1} \quad.
+\end{array}
+}
+\end{equation*}
+
+
+
+
+
+ 
+
+
+
+\clearpage
+\bibliographystyle{Chicago}
+\bibliography{Researchplan}
+\end{document}
