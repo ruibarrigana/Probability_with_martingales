@@ -1,0 +1,101 @@
+
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+
+
+%%% PACKAGES
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[english]{babel}
+\usepackage{natbib} 
+\usepackage{amsfonts}
+\usepackage{hyphenat}
+\usepackage{booktabs} % for much better looking tables
+\usepackage{enumerate}
+%\usepackage{kbordermatrix} % for matrices with indexes and brackets instead of parentheses;
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage[group-separator={,}]{siunitx}
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+\usepackage{caption}
+\usepackage{sidecap}
+\usepackage{setspace}
+\sidecaptionvpos{figure}{c}
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+%\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+\captionsetup[figure]{labelfont={bf,it},textfont={it}}
+\setlength{\parindent}{0cm}
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{Probability with martingales - exercises}
+\author{}
+\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+{\bf \maketitle \par}
+
+
+\section*{E10.6}
+
+\vspace{\baselineskip}
+
+Let $X_{n}$ be the total money at stake before the $\left(n+1\right)^{\mathrm{th}}$ chosen letter. \\
+\begin{equation}
+\begin{array}{lcl}
+X_{n}&=&\displaystyle\sum_{a_{i} \in A} 26^{a_{i}}+\displaystyle\sum_{b_{i} \in B} 26^{b_{i}}+... \quad,
+\end{array}
+\end{equation} 
+where each summation gives the total amount of money bet on letter A, B, etc. (the sets $A$, $B$,... will either be empty or contain -- non strictly --  positive integers).  
+
+
+We have that\\
+\begin{equation}
+\begin{array}{lcl}
+\mathrm{\textbf{E}}\left(X_{n+1}|X_{n}\right)&=&\displaystyle\frac{1}{26}\sum_{a_{i} \in A} 26^{a_{i}+1}+\frac{1}{26}\displaystyle\sum_{b_{i} \in B} 26^{b_{i}+1}+...+1 \\
+&=&\displaystyle\sum_{a_{i} \in A} 26^{a_{i}}+\displaystyle\sum_{b_{i} \in B} 26^{b_{i}}+...+1\\
+&=&X_{n}+1
+\end{array}
+\end{equation}
+Using the tower property of conditional expectation repeatedly, \\
+$\mathrm{\textbf{E}}\left(X_{n}\right)=n+1$, since $X_{0}\equiv 1 \quad.$
+
+Also define, for all $n$:\\
+$M_{n}:=X_{n}-(n+1)$, so that $\mathrm{\textbf{E}}\left(M_{n}\right)=0$, and\\
+$C_{n}:=1\quad.$\\
+\\
+If the increments $M_{n}-M_{n-1}$ are bounded and $\mathrm{\textbf{E}}\left(T\right)< \infty$, then $\mathrm{\textbf{E}}\left(C \bullet M\right)_{T}=0$, by result 10.10.c. But $\left(C \bullet M\right)=M_{T}$, since $M_{0}=0$, and $M_{T}=X_{T}-\left(T+1\right)$. At the same time, it must be true that $X_{T}=26^{11}+26^{4}+26+1$ (which is the fortune of the 3 players in the game just after ABRACADABRA has been typed, plus the 1 pound that a new player bets just before time $T+1$). So $0=\mathrm{\textbf{E}}\left(C \bullet M\right)=\mathrm{\textbf{E}}\left[X_{T}-\left(T+1\right] \right)=\mathrm{\textbf{E}}\left[26^{11}+26^{4}+26+1-\left(T+1\right)\right]=26^{11}+26^{4}+26-\mathrm{\textbf{E}}\left(T\right)\quad.$\\
+\\
+It remains to prove that the increments $M_{n}-M_{n-1}=X_{n}-X_{n-1}-1$ are bounded and $\mathrm{\textbf{E}}\left(T\right)< \infty$.
+
+
+
+
+
+
+\clearpage
+\end{document}
